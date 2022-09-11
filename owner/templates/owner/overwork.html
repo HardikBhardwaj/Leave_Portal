@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <style>
+            h1{text-align: center;}
+            h2{text-align: center;}
+            h3{text-align: center;}
+            h4{text-align: center;}
+            .button {
+                padding: 10px 20px;
+                text-align: center;
+                transition: transform 0.5s;
+                  background-color: #3895D3;
+                }
+                .button:hover {
+                    -ms-transform: scale(1.2);
+                    -webkit-transform: scale(1.2);
+                    transform: scale(1.2); 
+                    background-color: #072f5f;
+                  }
+         </style>
+    </head>
+<body bgcolor="">
+    <button class="button"type="button" id="Adduser" name="adduser">
+        <a style="color:white ;font-size:15px;" href="{% url 'adminview' %}">Home</a>
+    </button>
+<button class="button" style="float: right;">
+  <a  style="color:white ;font-size:20px" href="{% url 'logout' %}">Logout</a>
+  </button>
+    <h2>Knowlvers Leave Application</h2>
+    <br>
+    <br>
+{%if user.username == 'Jessica' %}
+    <form method="post" action="">
+      {% csrf_token %}
+      <h3>Enter date  </h3>
+      <h3>
+      <input type="date" name="date">
+      </h3>
+      <br>
+      <h4>Note * please select the name very carefully</h4>
+      <h4> * click on select name option to see All users</h4>
+      <h3>Select name</h3>
+      <h3>
+      <select name="name" id="ov" style="height: 35px">
+      {%for item in objs%}
+      <option value="{{item.username}}">{{item.username}}</option>
+      {%endfor%}
+      </select>
+      </h3><br><br><br>
+      <h3>
+      <button name='submit'>Submit</button>
+      </h3>
+      </form>
+{%endif%}
+<br><br><br>
+
+</body>
+</html>

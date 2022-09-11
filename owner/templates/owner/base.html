@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+{% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Knowlvers site</title>
+        
+        <style>
+            	
+
+            
+            h1 {text-align: center;}
+            h2 {text-align: center;}
+            h3 {text-align: center;}
+            .b {
+                max-width: 2000px;
+                margin: auto;
+              }
+              table, th, td {
+                border: 1px solid black;
+                text-align:center;
+                padding-top: 10px;
+                padding-bottom:10px;
+                table-layout: fixed;
+                border-collapse: collapse;
+                padding: 10px;
+            }
+            .button {
+                padding: 10px 20px;
+                text-align: center;
+                transition: transform 0.5s;
+                  background-color: #3895D3;
+                }
+                .button:hover {
+                    -ms-transform: scale(1.2);
+                    -webkit-transform: scale(1.2);
+                    transform: scale(1.2); 
+                    background-color: #072f5f;
+                  }
+                .button1 {
+                    padding: 3px 5px;
+                    text-align: center;
+                    border: none;
+                      background-color: #FFFFFF;
+                      
+                    }
+           
+            </style>
+            
+    </head>
+    <body>
+       
+        <h3>
+        <button style="font-size: 1.3em"class="button1">
+            <b>Knowlvers Leave Application</b> </button></h3>
+    <!-- <a  href="#"><img  src="{% static 'assets/images/front1.jpg' %}"></a> -->
+ {%if not user.is_authenticated %}
+        
+         {% block content%}
+        
+          
+         {% endblock%} 
+         <br><br><br>
+          <h3> 
+          <button style="font-size: 1.0em"class="button1">
+            <b>This is leave onilne app for the employee of knowlvers</b>
+            </button></h3>
+
+         <br><br><br>
+         <h2><button class="button">
+            <a  style="color:white ;font-size:20px" href="{% url 'login' %}"> login</a>
+            </button></h3>
+         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        
+    {% else %}
+     <h1>
+     <button style="font-size: 0.7em"class="button1">
+        <b>{{"Hello , "}}{{user.username}}</b></button></h1>
+       <button class="button" style="float: right; margin-top: -100px">
+                <a  style="color:white ;font-size:20px" href="{% url 'logout' %}">Logout</a>
+                </button>
+                 <br><br><br>
+                <button class='button' style="float: right;  margin-top: -100px">
+                  <a  style="color:white ;font-size:20px" href="{% url 'change_password' %}">Change password</a>
+                  </button>
+            <!-- {{item.username}} -->
+            {%if user.username == 'Jessica' %}
+<div class="p">
+            <br><br>
+            <h3>
+                <button style="font-size: 0.8em"class="button1">
+                    <b>Delete user from record</b> </button>
+                </h3>
+            <h2>
+                <button class="button" type="button" id="Adduser" name="adduser">
+                    <a style="color:white ;font-size:15px;" href="{% url 'delete' %}">Delete User Data</a>
+                </button>
+                </h2>
+               
+                
+                <br><br><br>
+                
+                <h3>
+                    <button style="font-size: 0.8em"class="button1">
+                        <b>Performing work </b> </button>
+                    </h3>
+                <h3>
+                <button class="button"type="button" id="Adduser" name="adduser">
+                    <a style="color:white ;font-size:15px;" href="{% url 'adminview' %}">Show Data</a>
+                </button>
+                </h3><br><br><br><br><br>
+                </div>
+                
+            {%else%}
+			
+                     <br><br><br>
+                    <table  style="width: 100% ">
+                        <tr>
+                            <th>Total sick leaves</th>
+                            <th>Total casual leaves</th> 
+                           
+                            
+                            <th>Leaves carried forward</th>
+                            <th>Sick leaves taken</th>
+                            <th>Casual leaves taken</th>
+                            <th>Optional holidays</th>
+                            <th>Overwork</th>
+                          </tr>
+                          <tr>
+                        
+                            <td><b>{{objs3.sick_leave_alloted}}</b></td>
+                            <td><b>{{objs3.leaves}}</b> </td>
+                            <td><b>{{carryleave}}</b></td>
+                            <td><b>{{objs.sickleave}}</b></td>
+                            <td><b>{{objs.casualleave}}</b></td>
+                            <td><b>{{objs.optionalleave}}</b></td>
+                            <td><b>{{objs.overday}}</b></td>
+                        </tr>
+                    </table>
+                    <br><br>
+                    <table align="center">
+                        <tr>
+                            <th>Sick leaves remaining</th>
+                            <th>Casual leaves remaining</th>
+                            
+                        </tr>
+                        <tr>
+                            <td><b>{{remainingSickLeave}}</b></td>
+                            <td><b>{{remainingCasualLeave}}</b></td>
+                           
+                            
+                        </tr>
+                    </table>
+                  
+
+
+                  
+                <br><br>
+                <div class="b">
+                <!-- <label for="holiday"><button class="button1"><b>COMPULSORY HOLIDAYS:</b></button></label>
+                <select name="holidays" id="holiday">
+                    {%for item in objs2%}
+                        <option value="1">{{item.compulsaryleave.date}}</option>
+                    {%endfor%}
+                </select>
+                &emsp;&emsp; &emsp;&emsp;&emsp;&emsp;
+                <label for="opholiday"><button class="button1"><b>OPTIONAL HOLIDAYS:</b></button></label>
+                <select name="opholidays" id="opholiday">
+                    {%for item in objs1%}
+                        <option value="1">{{item.optionalleave.date}}</option>
+                    {%endfor%}
+                </select> -->
+                <h3>
+                    <button type="button" id="sick" class="button">
+                     <a style="color:white ;font-size:20px" href="{% url 'showholiday' %}"><b>Holidays</b> </a>
+                    </button>&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+		<button type="button" id="sick" class="button">
+                        <a style="color:white ;font-size:20px" href="{% url 'leave' %}"><b>For leave</b> </a>
+                       </button>&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    <button type="button" id="sick" class="button">
+                        <a style="color:white ;font-size:20px" href="{% url 'leavepolicy' %}"><b>Leave Policy</b></a> </a>
+                       </button>
+
+                </h3>
+     
+                
+                </div>
+                {%endif%}
+       
+    {% endif %}   
+    </body>
+</html>

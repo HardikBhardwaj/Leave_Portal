@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1{text-align: center;}
+        h2{text-align: center;}
+        h3{text-align: center;}
+        .button {
+            padding: 10px 20px;
+            text-align: center;
+            transition: transform 0.5s;
+              background-color: #3895D3;
+            }
+            .button:hover {
+                -ms-transform: scale(1.2);
+                -webkit-transform: scale(1.2);
+                transform: scale(1.2); 
+                background-color: #072f5f;
+              }
+              .button1{
+                 background-color: #6BC3E0;
+                  padding: 10px;
+              }
+
+    </style>
+
+</head>
+<body bgcolor="">
+   
+    
+    <h1>Knowlvers Leave Application</h1>
+
+    <h2>ADMIN PAGE </h2>
+{%if user.username == 'Jessica' %}
+<button class="button" style="float: right; margin-top: -100px">
+    <a  style="color:white ;font-size:20px" href="{% url 'logout' %}">Logout</a>
+    </button>
+     <br><br><br>
+    <button class='button' style="float: right;  margin-top: -100px">
+      <a  style="color:white ;font-size:20px" href="{% url 'change_password' %}">Change password</a>
+      </button>
+    <h3 > To see the leave application for accept and decline</h3>
+    <h3>
+    <button  class="button1" type="button" id="showappl" name="showappl">
+        <a href="{% url 'forreason1' %}">Show Application</a>
+    </button>
+    </h3>
+    <br>
+    <h3> To show the data of employees</h3>
+    <h3>
+    <button class="button1" type="button" id="showdata" name="showdata">
+        <a href="{% url 'showdata' %}">Employee's Data</a>
+    </button>
+    </h3>
+    <br>
+    <h3> To add new employee</h3>
+    <h3>
+    <button class="button1" type="button" id="Adduser" name="adduser">
+        <a href="{% url 'register' %}">Add User</a>
+    </button>
+    </h3>
+    <br>
+    <h3>Add compulsory and optional holidays</h3>
+    <h3>
+    <button  class="button1" type="button" id="holiday" name="holiday">
+        <a href="{% url 'holiday' %}">Holiday</a>
+    </button>
+    </h3>
+    <br>
+    <h3>If someone had overwork</h3>
+    <h3>
+    <button class="button1" type="button" id="overwork" name="overwork">
+        <a href="{% url 'overwork' %}">Add Overwork</a>
+    </button>
+    </h3>
+    <br>
+    <h3>Click here on new year to reset leaves</h3>
+    <h3>
+    <button class="button1" type="button" id="overwork" name="overwork" onclick="myFunction()">
+        <a >Reset leaves</a>
+    </button>
+    </h3>
+    <br>
+    
+      
+{%endif%}
+<script>
+    function myFunction() {
+      var reset =confirm("Are you sure you want to Reset Leaves?");
+   
+      if(reset){
+        
+          
+          location.href = "/reset";
+      }
+      else{
+      
+          location.reload();
+      }
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h2{text-align: center;}
+        h1{text-align: center;}
+        h3{text-align: center;}
+        table, th, td {
+            border: 1px solid black;
+            text-align:center;
+            padding-top: 10px;
+            padding-bottom:10px;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+        .button {
+            padding: 10px 20px;
+            text-align: center;
+            transition: transform 0.5s;
+              background-color: #3895D3;
+            }
+            .button:hover {
+                -ms-transform: scale(1.2);
+                -webkit-transform: scale(1.2);
+                transform: scale(1.2); 
+                background-color: #072f5f;
+              }
+    </style>
+
+</head>
+<body bgcolor="">
+{%if user.username == 'Jessica' %}
+<button class="button"type="button" id="Adduser" name="adduser">
+    <a style="color:white ;font-size:15px;" href="{% url 'adminview' %}">Home</a>
+</button>
+<button class="button" style="float: right;">
+  <a  style="color:white ;font-size:20px" href="{% url 'logout' %}">Logout</a>
+  </button>
+<h2>Knowlvers Leave Application</h2>
+<!-- <h3>This page is to see data of all users if he take any leave</h3> -->
+    <table style="width: 100% ">
+        <tr>
+            <th>Name</th>
+            <th>Joining date</th>
+	       <th>Total casual leaves</th>
+		<th>Total sick leaves</th>
+
+            
+            <th>Sick leaves taken</th> 
+            <th>Casual leaves taken</th>
+            <th>Optional holidays</th>
+            <th>Overwork</th>
+         
+          </tr>
+        {%for item in objs1%}
+        <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.joining_date}}</td>
+	    {%for item1 in objs2%}
+            {%if item1.name == item.name%}
+            <td>{{ item1.leaves}}</td>
+	    <td>{{ item1.sick_leave_alloted}}</td>
+            {%endif%}
+            {%endfor%}
+            <td>{{item.sickleave}}</td>
+            <td>{{item.casualleave}} </td>
+            <td>{{item.optionalleave}}</td>
+            <td>{{item.overday}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+{%endif%}
+<br><br>
+
+    
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1{text-align: center;}
+        h3{text-align: center;}
+        .button {
+            padding: 10px 20px;
+            text-align: center;
+            transition: transform 0.5s;
+              background-color: #3895D3;
+              text-decoration: none;
+            }
+            .button:hover {
+                -ms-transform: scale(1.2);
+                -webkit-transform: scale(1.2);
+                transform: scale(1.2); 
+                background-color: #072f5f;
+              }
+              table{
+                
+                text-align:center;
+                
+                border-collapse: collapse;
+            }
+            tr, th, td {
+                
+                padding: 15px;
+                border : solid black 2px;
+            }
+    </style>
+
+</head>
+
+<body bgcolor="">
+{%if user.username == 'Jessica' %}
+<button class="button"type="button" id="Adduser" name="adduser">
+    <a style="color:white ;font-size:15px;" href="{% url 'adminview' %}">Home</a>
+</button>
+<button class="button" style="float: right">
+  <a  style="color:white ;font-size:20px" href="{% url 'logout' %}">Logout</a>
+  </button>
+<h1> Knowlvers Leave Application</h1>
+<h3>* All the user are shown here </h3>
+        <h3>* Click on delete button if you want to delete the user</h3>
+        <h3>* On delete all the records of user will be deleted</h3> 
+        <br><br>
+    <form method="POST" >
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <td>User Name</td>
+                <td>Action</td>
+            </tr>
+        {%for item in objs %}
+        <tr>
+            <td>{{item.username}}</td>
+            <td><button id="delete" name="delete" value="{{item.username}}" onclick="func()"> DELETE</button></td>
+        </tr>
+        {%endfor%}  
+        </table>
+        <!-- {%for item in objs %}
+        
+            <h3><b>User name:-</b>&emsp; &emsp; {{item.username}}&emsp; &emsp;
+            <button id="delete" name="delete" value="{{item.username}}"> DELETE</button>
+            </h3>
+        {%endfor%}    -->
+      </form>
+      <br><br>
+     
+{%endif%}
+<script>
+    function func() {
+        
+   
+        alert('User is deleted')
+     }
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <style>
+    h1{text-align: center;}
+    h3{text-align: center;}
+    .b {
+        
+        max-width: 170px;
+        margin: auto;
+        background-color: #FFFFFF;
+      }
+      .c {
+        border-radius: 25px;
+        height: 400px;
+        max-width: 300px;
+        margin: auto;
+        background-color: #FFFFFF;
+        box-shadow: 10px 10px 5px grey;
+      }
+      .button {
+        padding: 10px 25px;
+        text-align: center;
+        transition: transform 0.5s;
+        background-color: #3895D3;
+        }
+        .button:hover {
+          -ms-transform: scale(1.2);
+          -webkit-transform: scale(1.2);
+          transform: scale(1.2); 
+          background-color: #072f5f;
+        }
+        .button1 {
+          padding: 3px 10px;
+          text-align: center;
+          border: none;
+            background-color: #FFFFFF;
+            
+          }
+        body{
+           
+            background-repeat: no-repeat;
+            height: 100%;
+          
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            margin: 0;
+            position: relative;
+
+        }
+      
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+    
+  <h1> 
+    <button  style="font-size: 0.75em"class="button1"><b>Knowlvers Leave Application</b></button></h1>
+<br>
+
+<br>
+<div class="c">
+<div class="b">
+    <br><br>
+    <h3> <u>Sign in</u></h3>
+{% load crispy_forms_tags %}
+<form method="post" class="from-group">
+    {% csrf_token %}
+    <br>
+    {{ form | crispy}}
+    <br>
+    <h3>
+    <button  style="color:white; font-size:15px" type="submit", class="button"><b>Login account</b></button>
+    </h3>
+    
+</form>
+</div>
+<h3>
+  <button  style="color:white; font-size:12px" type="submit", class="button"> <a href="{% url 'forgot1' %}"><b style="color:white">Forgot password</a></button>
+  </h3>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+

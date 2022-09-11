@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            h2{text-align: center;}
+            .button {
+                padding: 10px 20px;
+                text-align: center;
+                transition: transform 0.5s;
+                  background-color: #3895D3;
+                }
+                .button:hover {
+                    -ms-transform: scale(1.2);
+                    -webkit-transform: scale(1.2);
+                    transform: scale(1.2); 
+                    background-color: #072f5f;
+                  }
+                  table{
+                    
+                    text-align:center;
+                    
+                    border-collapse: collapse;
+                }
+                tr, th, td {
+                    
+                    padding: 15px;
+                    border : solid black 2px;
+                }
+                
+        </style>
+    
+    </head>
+<body bgcolor="">
+
+{%if user.username == 'Jessica' %}
+<button class="button"type="button" id="Adduser" name="adduser">
+    <a style="color:white ;font-size:15px;" href="{% url 'adminview' %}">Home</a>
+</button>
+<button class="button" style="float: right;">
+  <a  style="color:white ;font-size:20px" href="{% url 'logout' %}">Logout</a>
+  </button>
+<br><br>
+<diV style="display: inline;">
+   
+    <form method="POST" >
+        {% csrf_token %}
+        
+        <table style="display: inline;">
+            <tr>
+                <th colspan="4">Optional holidays</th>
+            </tr>
+            <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        {%for item in objs%}
+        <tr>
+            <td>{{item.optionalleave.date}}</td>
+            <td>{{item.description}}</td>
+            <td><button id="delete1" name="delete1" value="oo{{item.id}}"> DELETE</button></td>
+        </tr>
+        {%endfor%} 
+        </table>
+            
+      
+       
+       <table style="margin-left: 100px; display:inline">
+       
+        <tr>
+            <th colspan="4">Compulsory holidays</th>
+        </tr>
+        
+        <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        {%for item in objs1%}
+        <tr>
+            <td>{{item.compulsaryleave.date}} </td>
+            <td> {{item.description}}</td>
+            <td> <button id="delete" name="delete" value="cc{{item.id}}"> DELETE</button></td>
+        </tr>
+        {%endfor%}     
+       </table>
+      
+       
+    </form>
+    </diV>
+
+    <form method="post" >
+        {% csrf_token %}
+        <h1>Compulsory holiday</h1>
+        <input type="date" name="compulsaryleave">
+        <br>
+        <input name="descriptionC">
+        <button name="compulsary" value="compulsary">Submit</button>
+        <h1>Optional holiday</h1>
+        <input type="date" name="optionalleave">
+        <br>
+        <input name="descriptionO">
+        <button name="optional" value="optional">Submit</button> 
+    </form>
+   
+        
+{%endif%}
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1{text-align: center;}
+        h2{text-align: center;}
+        h3{text-align: center;}
+        .b{
+            max-width: 350px;
+            margin: auto;
+        }
+        .c {
+            border-radius: 25px;
+            height: 500px;
+            max-width: 400px;
+            margin: auto;
+            background-color: #FFFFFF;
+            box-shadow: 10px 10px 5px grey;
+          }
+          .button {
+            padding: 10px 25px;
+            text-align: center;
+            background-color: #3895D3;
+            }
+            .button1 {
+                padding: 3px 10px;
+                text-align: center;
+                border: none;
+                  background-color: #FFFFFF;
+                  
+                }
+        body{
+            background-image: url("{% static 'assets/images/login.png' %}");
+            background-repeat: no-repeat;
+            height: 100%;
+          
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            margin: 0;
+            position: relative;
+
+        }
+    </style>
+
+</head>
+<body>
+{%if user.username == 'Jessica' %}
+{% block content%}
+<h1> 
+    <button  style="font-size: 0.75em"class="button1"><b>Knowlvers Leave Application</b></button></h1>
+<h1> 
+    <button  style="font-size: 0.75em"class="button1"><b>Add User</b></button></h1>
+<br>
+<div class="c">
+<div class="b">
+    <br><br>
+{% load crispy_forms_tags %}
+<form method="POST" class="form-group">
+    {% csrf_token %}
+    {{form| crispy}}
+    <br><br>  
+    <h3>
+    <button  style="color:white; font-size:15px" type="submit", class="button"> Register</button>
+    </h3>
+</form>
+{% endblock%}
+</div>
+</div>
+<br><br><br><br><br>
+{%endif%}
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      h1{text-align: center;}
+      h2{text-align: center;}
+      h3{text-align: center;}
+      button{text-align: center;}
+      select{text-align: center;}
+      .c {
+        border-radius: 25px;
+        height: 500px;
+        max-width: 400px;
+        margin: auto;
+        background-color: #FFFFFF;
+        box-shadow: 10px 10px 5px grey;
+      }
+      body{
+       
+       
+        height: 100%;
+      
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        margin: 0;
+        background-size: 100% 100%;
+        position: relative;
+
+    }
+    .button {
+      padding: 8px 25px;
+      text-align: center;
+      transition: transform 0.5s;
+        background-color: #3895D3;
+        
+      }
+      
+      .button:hover {
+        -ms-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2); 
+        background-color: #072f5f;
+      }
+      .button1 {
+        padding: 3px 10px;
+        text-align: center;
+        border: none;
+          background-color: #FFFFFF;
+          
+        }
+      
+        .multiselect {
+          width: 200px;
+        }
+        
+        .selectBox {
+          position: relative;
+        }
+        
+        .selectBox select {
+          width: 100%;
+          font-weight: bold;
+        }
+        
+        .overSelect {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+        }
+        
+        #checkboxes {
+          display: none;
+          background-color: white;
+          border: 1px #dadada solid;
+        }
+        
+        #checkboxes label {
+          display: block;
+        }
+        
+        #checkboxes label:hover {
+          background-color: #1e90ff;
+        }
+    </style>
+    <script>
+      var expanded = false;
+
+      function showCheckboxes() {
+      var checkboxes = document.getElementById("checkboxes");
+      if (!expanded) {
+      checkboxes.style.display = "block";
+      expanded = true;
+      } else {
+      checkboxes.style.display = "none";
+      expanded = false;
+      }
+    }
+    </script>
+
+</head><body >
+{%if user.is_authenticated %}
+<button class="button" style="float: right">
+  <a  style="color:white ;font-size:20px" href="{% url 'logout' %}">Logout</a>
+  </button>
+    <h1> 
+    <button  style="font-size: 0.75em"class="button1"><b>Knowlvers Leave Application</b></button></h1>
+    <h3> 
+    <button  style="font-size: 0.75em"class="button1"><h3>Date</h3></button></h3>
+    <div class="c">
+  
+    <form method="post" action="">
+        {% csrf_token %}
+        <h3> {{user.username}}</h3>
+    <h3>
+    <b> From* </b>&emsp;
+    <input type="date" name="from1">
+    </h3>
+    
+    <h3>
+    <b> To*</b>&emsp;
+    <input type="date" name="to">
+    </h3>
+    <br>
+       <h3>
+     <b> Reason*</b><textarea rows="3" cols="50" name="reason" type="text"></textarea>
+    </h3>
+    <br>
+    <h3>
+    <!-- status:-<input type="text"  name="status1"> -->
+
+    
+    <button style="font-size: 0.75em"class="button1"><b>Select the leave type</b></button>
+  
+    <select  name="name1" id="op">
+        <option value="casualleave">Casual leave</option>
+        <option value="sickleave">Sick leave</option>
+        {%if noofopl is 0%}
+        <option value="optionalleave">optional leave</option>
+        {%endif%}
+      </select >
+      <br><br>
+    </h3>
+    
+      
+        
+        <div class="multiselect" >
+          <div class="selectBox" onclick="showCheckboxes()">
+            <select>
+              <option>Select Colleague</option>
+            </select>
+            <div class="overSelect"></div>
+          </div>
+          <div id="checkboxes">
+          
+            {%for item in objs5%}
+            <label for="{{item.username}}">
+              <input type="checkbox" name="name" id="{{item.username}}" value="{{item.username}}">{{item.username}}</label>
+           {%endfor%}
+          </div>
+          </div>
+       <button style="color:white ;font-size:15px; margin-left:250px; margin-top:-50px"  name="reasonsubmit" class ="button">Submit </button> 
+
+     
+    <br><br><br>
+     </form> 
+     </div>
+     <br>
+     <br>
+     {%else%}
+     <br><br><br>
+
+     <h1> 
+      <button  style="font-size: 0.75em"class="button1"><b>you have not login yet</b></button></h1>
+     <br><br><br>
+    
+
+     <h1> 
+       
+      <button class="button">
+      <a  style="color:white ;font-size:20px" href="{% url 'login' %}"> login</a>
+      </button></h3>
+     
+
+  </h1>
+{%endif%}
+
+     
+</body> 
+</html>

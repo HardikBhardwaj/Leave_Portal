@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1{text-align: center;}
+        h3{text-align: center;}
+        table, th, td {
+            border: 1px solid black;
+            text-align:center;
+            padding-top: 10px;
+            padding-bottom:10px;
+            border-collapse: collapse;
+        }
+        .button {
+            padding: 10px 20px;
+            text-align: center;
+            transition: transform 0.5s;
+              background-color: #3895D3;
+            }
+            .button:hover {
+                -ms-transform: scale(1.2);
+                -webkit-transform: scale(1.2);
+                transform: scale(1.2); 
+                background-color: #072f5f;
+              }
+    </style>
+
+</head>
+
+<body bgcolor="">
+{%if user.username == 'Jessica' %}
+<button class="button"type="button" id="Adduser" name="adduser">
+    <a style="color:white ;font-size:15px;" href="{% url 'adminview' %}">Home</a>
+</button>
+<button class="button" style="float: right;">
+  <a  style="color:white ;font-size:20px" href="{% url 'logout' %}">Logout</a>
+  </button>
+<h1>Knowlvers Leave Application</h1>
+<!-- <h3> This page is to accept or decline leave applications </h3> -->
+
+   <!-- <h2> name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  leave reason &emsp;&emsp;   &emsp;&emsp;   &emsp;&emsp; from &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;TO &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; type of leave</h2> -->
+   
+    <table style="width: 100% ">
+        <tr>
+            <th>Name</th>
+            <th>Reason</th> 
+            <th>From</th>
+            <th>To</th>
+            <th>Type of leave</th>
+            <th> No of days</th>
+            <th>Casual leaves taken</th>
+            <th> Sick leaves taken</th>
+            <th>Action</th>
+          </tr>
+
+        {%for item in objs%}
+            <tr>
+
+                <td>{{item.name}}</td>
+                <td>{{item.reason}}</td>
+                <td>{{item.from1.date}} </td>
+                <td>{{item.to.date}}</td>
+                <td>{{item.status1}}</td>
+                <td>{{item.noofdays}}</td>
+                {%for item1 in objs1%}
+                
+                {%if item.name == item1.name %}
+            
+                <td>{{item1.casualleave}}</td>
+                <td>{{item1.sickleave}}</td>
+               
+                {%endif%}
+                    
+                {%endfor%}
+                
+                <td>
+                <form method="POST" >
+                    {% csrf_token %}
+                    <button id="accept" name="accept" value="{{item.name}}"> Accept</button>
+                    <button id="decline" name="decline" value="decline{{item.name}}"  onclick="myFunction()"> Decline</button>
+                </form>
+                </td>
+              </tr>
+
+    {%endfor%}
+    </table>
+{%endif%}
+
+<script>
+    function myFunction() {
+
+      var person = prompt("Please reason for decline");
+
+      if (person != null) {
+        document.getElementById("decline").setAttribute("value" ,document.getElementById("decline").getAttribute("value") + ": " + person);
+
+      }
+
+console.log(document.getElementById("decline").value)
+
+
+    }
+
+
+    </script>
+    
+</body>
+
+</html>

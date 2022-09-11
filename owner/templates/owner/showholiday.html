@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        
+          tr, th, td {
+                    
+            padding: 15px;
+            border : solid black 2px;
+        }
+      </style>
+</head>
+<body>
+    <diV style="display: inline;">
+   
+        <form method="POST" >
+            {% csrf_token %}
+            
+            <table style="display: inline;">
+                <tr>
+                    <th colspan="4">Optional holidays</th>
+                </tr>
+                <tr>
+                <th>Date</th>
+                <th>Description</th>
+               
+            </tr>
+            {%for item in objs%}
+            <tr>
+                <td>{{item.optionalleave.date}}</td>
+                <td>{{item.description}}</td>
+              
+            </tr>
+            {%endfor%} 
+            </table>
+                
+          
+           
+           <table style="margin-left: 100px; display:inline">
+           
+            <tr>
+                <th colspan="4">Compulsory holidays</th>
+            </tr>
+            
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                
+            </tr>
+            {%for item in objs1%}
+            <tr>
+                <td>{{item.compulsaryleave.date}} </td>
+                <td> {{item.description}}</td>
+                
+            </tr>
+            {%endfor%}     
+           </table>
+          
+           
+      
+        </diV>
+        
+</body>
